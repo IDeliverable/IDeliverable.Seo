@@ -67,7 +67,7 @@ To install the module from Orchard Gallery:
 
 To install the module using the ZIP file:
 
-1. Download the [module ZIP file](https://github.com/IDeliverable/IDeliverable.Seo/archive/orchard-1.10.x.zip).
+1. Download the [module ZIP file](https://github.com/IDeliverable/IDeliverable.Seo/archive/orchard-dev.zip).
 1. Unzip the contents into the `Modules` folder of your Orchard installation (this creates an `IDeliverable.Seo` subfolder).
 
 To integrate the module into your development workflow, unzip the contents into the `Orchard.Web\Modules` folder of your local repository and add it to source control (if any).
