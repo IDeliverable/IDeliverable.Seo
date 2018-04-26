@@ -1,0 +1,22 @@
+﻿@model IDeliverable.Seo.ViewModels.RobotsViewModel
+@{
+    Style.Include("CodeMirror.css", "CodeMirror.min.css");
+    Script.Require("jQuery");
+    Script.Include("CodeMirror.js", "CodeMirror.min.js");
+}
+@{
+    Layout.Title = T("Robots");
+}
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <fieldset>
+        <legend>@T("Robots.txt")</legend>
+        <div class="form-group">
+            @Html.TextAreaFor(m => m.RobotsTxt, 20, 75, new { @class = "text large codemirror", data_codemirror_theme = "neat" })
+            @Html.Hint(T("The Robots configuration. To help creating its contents, check out the following site: <a href=\"{0}\">{1}</a>", "http://www.mcanerin.com/EN/search-engine/robots-txt.asp", "http://www.mcanerin.com/EN/search-engine/robots-txt.asp"))
+        </div>
+    </fieldset>
+    <fieldset>
+        <button type="submit">@T("Save")</button>
+    </fieldset>
+}

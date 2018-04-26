@@ -1,0 +1,68 @@
+﻿@using IDeliverable.Seo.Models;
+@model IDeliverable.Seo.ViewModels.CustomSitemapEntryIndexViewModel
+@{
+    Layout.Title = T("Custom Sitemap URLs");
+}
+@{
+    Style.Include("admin-sitemap.css");
+    Script.Require("ShapesBase");
+}
+<div class="manage">
+    @Html.ActionLink(T("Add Custom Url").ToString(), "Create", "CustomSitemapEntry", new { Area = "IDeliverable.Seo" }, new { @class = "button primaryAction" })
+</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <fieldset class="bulk-actions">
+        <label for="bulkAction">@T("Action:")</label>
+        <select id="bulkAction" name="@Html.FieldNameFor(m => m.BulkAction)">
+            @Html.SelectOption(Model.BulkAction, CustomSitemapEntryBulkAction.None, T("Select action...").ToString())
+            @Html.SelectOption(Model.BulkAction, CustomSitemapEntryBulkAction.Delete, T("Delete").ToString())
+        </select>
+        <button type="submit" name="submit.BulkAction" value="yes">@T("Apply")</button>
+    </fieldset>
+    <fieldset class="bulk-actions">
+        <label for="orderResults" class="bulk-order">@T("Order by:")</label>
+        <select id="orderResults" name="@Html.FieldNameFor(m => m.OrderBy)">
+            @Html.SelectOption(Model.OrderBy, CustomSitemapEntryOrderBy.Priority, T("Priority").ToString())
+            @Html.SelectOption(Model.OrderBy, CustomSitemapEntryOrderBy.ChangeFrequency, T("Change Frequency").ToString())
+            @Html.SelectOption(Model.OrderBy, CustomSitemapEntryOrderBy.LastModified, T("Last Modified").ToString())
+            @Html.SelectOption(Model.OrderBy, CustomSitemapEntryOrderBy.Url, T("Url").ToString())
+        </select>
+        <button type="submit" name="submit.Filter" value="yes">@T("Apply")</button>
+    </fieldset>
+    <table class="items">
+        <thead>
+        <tr>
+            <th><input type="checkbox" class="check-all"/></th>
+            <th>@T("Url")</th>
+            <th>@T("Change Frequency")</th>
+            <th>@T("Priority")</th>
+            <th>@T("Last Modified")</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{ var index = 0;}
+        @foreach (var entry in Model.Entries)
+        {
+            var closureIndex = index;
+            <tr>
+                <td>
+                    <input type="hidden" name="@Html.FieldNameFor(m => m.Entries[closureIndex].Id)" value="@entry.Id" />
+                    <input type="checkbox" name="@Html.FieldNameFor(m => m.Entries[closureIndex].IsSelected)" value="true"/>
+                </td>
+                <td>@entry.Url</td>
+                <td>@entry.ChangeFrequency</td>
+                <td>@(entry.Priority != null ? entry.Priority.Value.ToString("f1") : "")</td>
+                <td>@entry.LastModifiedUtc</td>
+                <td>
+                    <a href="@Url.Action("Edit", "CustomSitemapEntry", new {Area = "IDeliverable.Seo", id = entry.Id})">@T("Edit")</a>@T(" | ")
+                    <a href="@Url.Action("Delete", "CustomSitemapEntry", new {Area = "IDeliverable.Seo", id = entry.Id})" data-unsafe-url="@T("Are you sure you want to delete this entry?")">@T("Delete")</a>
+                </td>
+            </tr>
+            index++;
+        }
+        </tbody>
+    </table>
+}
+@Display(Model.Pager)

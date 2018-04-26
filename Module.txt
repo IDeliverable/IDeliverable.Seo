@@ -1,0 +1,38 @@
+﻿Name: Seo
+AntiForgery: enabled
+Author: IDeliverable
+Website: http://www.ideliverable.com/products/ideliverable-seo
+Version: 0.0.0.0
+OrchardVersion: 1.10
+Description: Provides SEO features to help optimize your website for search engines and improve discoverability.
+Features:
+    IDeliverable.Seo:
+        Name: Seo
+        Description: Enables SEO features to help optimize your website for search engines and improve discoverability.
+        Category: SEO
+        Dependencies: Orchard.Resources
+    IDeliverable.Seo.Sitemap:
+        Name: Seo Sitemap
+        Description: Enables features that automatically expose an XML sitemap for your website.
+        Category: SEO
+        Dependencies: IDeliverable.Seo, Orchard.Autoroute
+    IDeliverable.Seo.Sitemap.Tags:
+        Name: Seo Sitemap for Tags
+        Description: Enables features that allow tags to be included in the XML sitemap for your website.
+        Category: SEO
+        Dependencies: IDeliverable.Seo.Sitemap, Orchard.Tags
+    IDeliverable.Seo.Sitemap.Images.MediaLibraryPicker:
+        Name: Seo Sitemap Images: MediaLibraryPicker
+        Description: Includes MediaLibraryPicker field images in the sitemap.
+        Category: SEO
+        Dependencies: IDeliverable.Seo.Sitemap, Orchard.MediaLibrary
+    IDeliverable.Seo.Robots:
+        Name: Seo Robots
+        Description: Enables features that allow you to configure and expose a robots.txt for your website.
+        Category: SEO
+        Dependencies: IDeliverable.Seo
+    IDeliverable.Seo.Routes:
+        Name: Seo Routes
+        Description: Enables alternate aliases and redirect options for content items.
+        Category: Content
+        Dependencies: IDeliverable.Seo, Orchard.Alias, Orchard.Autoroute

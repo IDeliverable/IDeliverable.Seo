@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{886515EB-CF94-4E5B-BAFA-C95DF3A1F382}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IDeliverable.Seo</RootNamespace>
+    <AssemblyName>IDeliverable.Seo</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\OrchardBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets.json" />
+    <Content Include="App_Data\Localization\en-US\orchard.module.po" />
+    <Content Include="Assets\Less\RoutesAdmin.less" />
+    <Content Include="Placement.info" />
+    <Content Include="Assets\Css\CodeMirror\codemirror-orchard.css" />
+    <Content Include="Assets\Css\CodeMirror\neat.css" />
+    <Content Include="Assets\Css\CodeMirror\vibrant-ink.css" />
+    <Content Include="Assets\JavaScript\CodeMirror\codemirror-orchard.js" />
+    <Content Include="Recipes\routes.recipe.xml" />
+    <Content Include="Recipes\sitemap-tags.recipe.xml" />
+    <Content Include="Recipes\robots.recipe.xml" />
+    <Content Include="Recipes\sitemap.recipe.xml" />
+    <Content Include="Recipes\seo.recipe.xml" />
+    <Content Include="Assets\JavaScript\CodeMirror\codemirror.js" />
+    <Content Include="Scripts\CodeMirror.js" />
+    <Content Include="Scripts\CodeMirror.min.js" />
+    <Content Include="Styles\admin-seo.css" />
+    <Content Include="Assets\Css\CodeMirror\codemirror.css" />
+    <Content Include="Styles\CodeMirror.css" />
+    <Content Include="Styles\CodeMirror.min.css" />
+    <Content Include="Styles\menu.seo-admin.css" />
+    <Content Include="Styles\admin-sitemap.css" />
+    <Content Include="Web.config" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Module.txt" />
+    <Content Include="Views\EditorTemplates\Parts\Seo.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\SeoSitemap.cshtml" />
+    <Content Include="Views\SitemapAdmin\Index.cshtml" />
+    <Content Include="Views\RobotsAdmin\Index.cshtml" />
+    <Content Include="Views\CustomSitemapEntry\Create.cshtml" />
+    <Content Include="Views\CustomSitemapEntry\Edit.cshtml" />
+    <Content Include="Views\EditorTemplates\CustomSitemapEntryEditViewModel.cshtml" />
+    <Content Include="Views\CustomSitemapEntry\Index.cshtml" />
+    <Content Include="Views\SitemapAdmin\Settings.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\Seo.License.cshtml" />
+    <Content Include="Views\Seo.InvalidLicense.cshtml" />
+    <Content Include="Views\Parts\Seo.InvalidLicense.cshtml" />
+    <Content Include="Views\Parts\Seo.Edit.InvalidLicense.cshtml" />
+    <Content Include="Views\Parts\SeoSitemap.Edit.InvalidLicense.cshtml" />
+    <Content Include="packages.config" />
+    <Content Include="IDeliverable.Seo.nuspec" />
+    <Content Include="IDeliverable.Seo.Source.nuspec" />
+    <None Include="Properties\PublishProfiles\Package.pubxml" />
+    <Content Include="Views\EditorTemplates\Parts\Routes.cshtml" />
+    <Content Include="Views\DefinitionTemplates\SeoSitemapPartSettings.cshtml" />
+    <Content Include="Views\SitemapAdmin\SearchEngines.cshtml" />
+    <Content Include="Views\Parts\Routes.SummaryAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\IDeliverable\IDeliverable.Licensing.Orchard\IDeliverable.Licensing.Orchard.csproj">
+      <Project>{f1467a6b-2397-447b-be90-766d192ec3d9}</Project>
+      <Name>IDeliverable.Licensing.Orchard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\IDeliverable\IDeliverable.Licensing\IDeliverable.Licensing.csproj">
+      <Project>{7e439cb7-1ace-435f-a8f3-5bb929423e34}</Project>
+      <Name>IDeliverable.Licensing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
+      <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Orchard.Core.csproj">
+      <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
+      <Name>Orchard.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Alias\Orchard.Alias.csproj">
+      <Project>{475b6c45-b27c-438b-8966-908b9d6d1077}</Project>
+      <Name>Orchard.Alias</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Autoroute\Orchard.Autoroute.csproj">
+      <Project>{66fccd76-2761-47e3-8d11-b45d0001ddaa}</Project>
+      <Name>Orchard.Autoroute</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Blogs\Orchard.Blogs.csproj">
+      <Project>{63fbd4d9-e1da-4a7b-aa6a-d6074fe50867}</Project>
+      <Name>Orchard.Blogs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.MediaLibrary\Orchard.MediaLibrary.csproj">
+      <Project>{73A7688A-5BD3-4F7E-ADFA-CE36C5A10E3B}</Project>
+      <Name>Orchard.MediaLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Tags\Orchard.Tags.csproj">
+      <Project>{5d0f00f0-26c9-4785-ad61-b85710c60eb0}</Project>
+      <Name>Orchard.Tags</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionResults\RobotsResult.cs" />
+    <Compile Include="Controllers\RouteController.cs" />
+    <Compile Include="Drivers\RoutesPartDriver.cs" />
+    <Compile Include="Handlers\RoutesPartHandler.cs" />
+    <Compile Include="Licensing\InvalidLicenseResult.cs" />
+    <Compile Include="Licensing\LicenseValidation.cs" />
+    <Compile Include="Migrations\RoutesMigrations.cs" />
+    <Compile Include="Models\AlternateRoute.cs" />
+    <Compile Include="Models\AlternateRouteAction.cs" />
+    <Compile Include="Models\ImageEntry.cs" />
+    <Compile Include="Models\RoutesPart.cs" />
+    <Compile Include="Models\SitemapIndexEntry.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\SitemapImage\MediaLibraryPickerSitemapEntryHandler.cs" />
+    <Compile Include="Routes\RedirectRoutes.cs" />
+    <Compile Include="Services\IRoutesService.cs" />
+    <Compile Include="Services\ISitemapEntryHandler.cs" />
+    <Compile Include="Services\RoutesService.cs" />
+    <Compile Include="Services\SitemapEntryComparer.cs" />
+    <Compile Include="ActionResults\SitemapResult.cs" />
+    <Compile Include="Controllers\RobotsController.cs" />
+    <Compile Include="Licensing\SeoLicenseSettingsPartDriver.cs" />
+    <Compile Include="Licensing\SeoLicenseSettingsPartHandler.cs" />
+    <Compile Include="Licensing\LicensedProductManifest.cs" />
+    <Compile Include="Licensing\LicenseValidationErrorBanner.cs" />
+    <Compile Include="Licensing\SeoLicenseSettingsPart.cs" />
+    <Compile Include="Providers\Sitemap\NavigationSitemapProvider.cs" />
+    <Compile Include="Providers\Sitemap\TagsSitemapProvider.cs" />
+    <Compile Include="Providers\Sitemap\RoutableContentSitemapProvider.cs" />
+    <Compile Include="Models\SitemapEntryCreatedContext.cs" />
+    <Compile Include="Services\SitemapEntryHandlerBase.cs" />
+    <Compile Include="Settings\SeoSitemapPartSettings.cs" />
+    <Compile Include="Settings\SeoSitemapPartSettingsHandler.cs" />
+    <Compile Include="ViewModels\AlternateRouteViewModel.cs" />
+    <Compile Include="ViewModels\RobotsViewModel.cs" />
+    <Compile Include="Handlers\RobotsSettingsPartHandler.cs" />
+    <Compile Include="Handlers\SeoSitemapSettingsPartHandler.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Models\RobotsSettingsPart.cs" />
+    <Compile Include="Models\SitemapEntry.cs" />
+    <Compile Include="Routes\RobotRoutes.cs" />
+    <Compile Include="Services\ISitemapSubmitter.cs" />
+    <Compile Include="Services\ISitemapSubmitterJob.cs" />
+    <Compile Include="Services\SitemapSubmissionResult.cs" />
+    <Compile Include="Services\SitemapSubmitter.cs" />
+    <Compile Include="Services\SubmitSitemapResult.cs" />
+    <Compile Include="ViewModels\RoutesViewModel.cs" />
+    <Compile Include="ViewModels\SeoPartViewModel.cs" />
+    <Compile Include="ViewModels\SeoSitemapSearchEnginesViewModel.cs" />
+    <Compile Include="ViewModels\SeoSitemapSettingsViewModel.cs" />
+    <Compile Include="Models\CustomSitemapEntry.cs" />
+    <Compile Include="Models\CustomSitemapEntryOrderBy.cs" />
+    <Compile Include="Models\SeoSitemapSettingsPart.cs" />
+    <Compile Include="Providers\Sitemap\CustomEntrySitemapProvider.cs" />
+    <Compile Include="ViewModels\CustomSitemapEntryViewModel.cs" />
+    <Compile Include="ViewModels\CustomSitemapEntryIndexViewModel.cs" />
+    <Compile Include="ViewModels\CustomSitemapEntryEditViewModel.cs" />
+    <Compile Include="Controllers\RobotsAdminController.cs" />
+    <Compile Include="Controllers\CustomSitemapEntryController.cs" />
+    <Compile Include="Controllers\SitemapAdminController.cs" />
+    <Compile Include="Drivers\SeoSitemapPartDriver.cs" />
+    <Compile Include="Menus\RobotsAdminMenu.cs" />
+    <Compile Include="Menus\SitemapAdminMenu.cs" />
+    <Compile Include="Migrations\SitemapMigrations.cs" />
+    <Compile Include="Models\CustomSitemapEntryRecord.cs" />
+    <Compile Include="Models\SitemapEntryOrderBy.cs" />
+    <Compile Include="Models\CustomSitemapEntryBulkAction.cs" />
+    <Compile Include="Models\ChangeFrequency.cs" />
+    <Compile Include="Models\SeoSitemapPart.cs" />
+    <Compile Include="Services\ISitemapService.cs" />
+    <Compile Include="Services\ISitemapHandler.cs" />
+    <Compile Include="Controllers\SitemapController.cs" />
+    <Compile Include="Drivers\SeoPartDriver.cs" />
+    <Compile Include="Helpers\TitleHtmlExtensions.cs" />
+    <Compile Include="Models\SeoPart.cs" />
+    <Compile Include="Migrations\SeoMigrations.cs" />
+    <Compile Include="Routes\SitemapRoutes.cs" />
+    <Compile Include="Models\SitemapEntryMetadata.cs" />
+    <Compile Include="Models\SitemapEntryMetadataContext.cs" />
+    <Compile Include="Services\SitemapService.cs" />
+    <Compile Include="Services\SeoPageTitleBuilder.cs" />
+    <Compile Include="Models\SitemapContext.cs" />
+    <Compile Include="Services\SitemapProviderBase.cs" />
+    <Compile Include="ViewModels\SitemapIndexViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

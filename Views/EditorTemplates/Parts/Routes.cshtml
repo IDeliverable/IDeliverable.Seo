@@ -1,0 +1,59 @@
+﻿@using IDeliverable.Seo.Models
+@using Orchard.Autoroute.Models
+@using Orchard.ContentManagement
+@using Orchard.Environment.Configuration
+@using Orchard.Mvc.Extensions
+@model IDeliverable.Seo.ViewModels.RoutesViewModel
+@{
+    Script.Require("ShapesBase");
+    Style.Include("admin-routes.css");
+}
+@{
+    var urlPrefix = WorkContext.Resolve<ShellSettings>().RequestUrlPrefix;
+    if (!String.IsNullOrWhiteSpace(urlPrefix))
+    {
+        urlPrefix += "/";
+    }
+}
+<fieldset class="permalink">
+    @Html.CheckBoxFor(m => m.EnableAlternateRoutes)
+    @Html.LabelFor(m => m.EnableAlternateRoutes, T("Additional Routes").ToString(), new { @class = "forcheckbox" })
+    @if (Model.ContentItem.Is<AutoroutePart>()) {
+        @Html.Hint(T("Check to specify additional paths to this content item. The path specified by the AutoroutePart represents the canonical URL."))
+    }
+    else {
+        @Html.Hint(T("Check to specify additional paths to this content item."))
+    }
+    <div data-controllerid="@Html.FieldIdFor(m => m.EnableAlternateRoutes)">
+        <table class="items alternate-routes">
+            <thead>
+            <tr>
+                <th>@T("Alias")</th>
+                <th>@T("Action")</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (var routeIndex = 0; routeIndex < Model.AlternateRoutes.Count; routeIndex++)
+            {
+                var routeActionOptions = new[] {
+                    new SelectListItem { Value = AlternateRouteAction.MovedPermanently.ToString(), Text = "Moved Permanently (301)", Selected = Model.AlternateRoutes[routeIndex].Action == AlternateRouteAction.MovedPermanently},
+                    new SelectListItem { Value = AlternateRouteAction.MovedTemporarily.ToString(), Text = "Moved Temporarily (302)", Selected = Model.AlternateRoutes[routeIndex].Action == AlternateRouteAction.MovedTemporarily},
+                    new SelectListItem { Value = AlternateRouteAction.Alias.ToString(), Text = "Alias (200)", Selected = Model.AlternateRoutes[routeIndex].Action == AlternateRouteAction.Alias},
+                };
+                <tr>
+                    <td>
+                        @Html.HiddenFor(m => m.AlternateRoutes[routeIndex].Remove)
+                        <span class="permalink-definition" dir="ltr">
+                            <span>@Url.MakeAbsolute("/")@urlPrefix</span>
+                            <span>@Html.TextBoxFor(m => m.AlternateRoutes[routeIndex].Alias, new { @class = "text is-url" })</span>
+                        </span>
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.AlternateRoutes[routeIndex].Action, routeActionOptions, "Select Action...")
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</fieldset>

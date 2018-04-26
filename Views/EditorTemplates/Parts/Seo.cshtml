@@ -1,0 +1,71 @@
+﻿@model IDeliverable.Seo.ViewModels.SeoPartViewModel
+@{
+    Style.Include("admin-seo.css");
+    Script.Require("ShapesBase");
+}
+@{
+    var metaRobotsIndexId = Html.FieldIdFor(m => m.MetaRobotsIndex);
+    var metaRobotsFollowId = Html.FieldIdFor(m => m.MetaRobotsFollow);
+    var metaRobotsNoFollowId = String.Format("{0}_NoFollow", metaRobotsFollowId);
+    var metaRobotsUnspecifiedFollowId = String.Format("{0}_UnspecifiedFollow", metaRobotsFollowId);
+    var metaRobotsNoIndexId = String.Format("{0}_NoIndex", metaRobotsIndexId);
+    var metaRobotsUnspecifiedIndexId = String.Format("{0}_UnspecifiedIndex", metaRobotsIndexId);
+}
+@Display.TokenHint()
+<fieldset>
+    <legend>@T("SEO")</legend>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PageTitle, T("Page Title"))
+        @Html.TextBoxFor(m => m.PageTitle, new {@class = "text large tokenized"})
+        @Html.Hint(T("The text you want to display in the webbrowser's title bar."))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.MetaKeywords, T("Meta Keywords"))
+        @Html.TextBoxFor(m => m.MetaKeywords, new {@class = "text large tokenized"})
+        @Html.Hint(T("The meta keywords to render as part of this page."))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.MetaDescription, T("Meta Description"))
+        @Html.TextAreaFor(m => m.MetaDescription, new {@class = "text large tokenized"})
+        @Html.Hint(T("The meta description to render as part of this page."))
+    </div>
+    <div class="form-group">
+        <label>@T("Meta Robots")</label>
+        <ul class="horizontal-radios">
+            <li class="label">@T("Follow:")</li>
+            <li>
+                @Html.RadioButton("MetaRobotsFollow", "follow", String.Equals(Model.MetaRobotsFollow, "follow"), new {id = metaRobotsFollowId})
+                <label class="forcheckbox" for="@metaRobotsFollowId">@T("follow")</label>
+            </li>
+            <li>
+                @Html.RadioButton("MetaRobotsFollow", "nofollow", String.Equals(Model.MetaRobotsFollow, "nofollow"), new {id = metaRobotsNoFollowId})
+                <label class="forcheckbox" for="@metaRobotsNoFollowId">@T("nofollow")</label>
+            </li>
+            <li>
+                @Html.RadioButton("MetaRobotsFollow", "", String.IsNullOrWhiteSpace(Model.MetaRobotsFollow), new {id = metaRobotsUnspecifiedFollowId})
+                <label class="forcheckbox" for="@metaRobotsUnspecifiedFollowId">@T("unspecified")</label>
+            </li>
+        </ul>
+        <ul class="horizontal-radios">
+            <li class="label">@T("Index:")</li>
+            <li>
+                @Html.RadioButton("MetaRobotsIndex", "index", String.Equals(Model.MetaRobotsIndex, "index"), new {id = metaRobotsIndexId})
+                <label class="forcheckbox" for="@metaRobotsIndexId">@T("index")</label>
+            </li>
+            <li>
+                @Html.RadioButton("MetaRobotsIndex", "noindex", String.Equals(Model.MetaRobotsIndex, "noindex"), new {id = metaRobotsNoIndexId})
+                <label class="forcheckbox" for="@metaRobotsNoIndexId">@T("noindex")</label>
+            </li>
+            <li>
+                @Html.RadioButton("MetaRobotsIndex", "", String.IsNullOrWhiteSpace(Model.MetaRobotsIndex), new {id = metaRobotsUnspecifiedIndexId})
+                <label class="forcheckbox" for="@metaRobotsUnspecifiedIndexId">@T("unspecified")</label>
+            </li>
+        </ul>
+        @Html.Hint(T("The meta robots to render as part of this page."))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CustomMetaTags, T("Custom Meta Tags").ToString(), new { @class = "forcheckbox" })
+        @Html.TextAreaFor(m => m.CustomMetaTags)
+        @Html.Hint(T("Provide one name=content pair per line. For example: googlebots=nofollow. The provided values will automatically be rendered using &lt;meta&gt; tags."))
+    </div>
+</fieldset>

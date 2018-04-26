@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+        <id>IDeliverable.Seo.Source</id>
+        <version>0.0.0</version>
+        <authors>IDeliverable Ltd.</authors>
+        <owners>IDeliverable Ltd.</owners>
+        <licenseUrl>http://www.ideliverable.com/products/premium-orchard-modules/ideliverable-seo</licenseUrl>
+        <projectUrl>http://www.ideliverable.com/products/premium-orchard-modules/ideliverable-seo</projectUrl>
+        <iconUrl>http://storage.ideliverable.com/media/Default/Products/IDeliverable.Seo-Logo-256.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <summary>Full source code for the IDeliverable.Seo module for the Orchard CMS.</summary>
+        <description>Full source code for the IDeliverable.Seo module for the Orchard CMS.</description>
+        <tags>IDeliverable SEO Orchard CMS Module Source</tags>
+    </metadata>
+    <files>
+        <file src="**" exclude="App_Data\*;bin\*;obj\*;Scripts\*.js;Styles\*.css;*.nuspec" />
+    </files>   
+</package>

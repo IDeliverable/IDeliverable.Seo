@@ -1,0 +1,80 @@
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "Name"
+msgid "Seo"
+msgstr "Seo"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "Author"
+msgid "IDeliverable"
+msgstr "IDeliverable"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "Website"
+msgid "http://www.ideliverable.com"
+msgstr "http://www.ideliverable.com"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "Description"
+msgid "Provides SEO features that enhances your site's discoverability."
+msgstr "Provides SEO features that enhances your site's discoverability."
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Name"
+msgid "Seo"
+msgstr "Seo"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Description"
+msgid "Provides SEO features that enhances your site's discoverability."
+msgstr "Provides SEO features that enhances your site's discoverability."
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Category"
+msgid "SEO"
+msgstr "SEO"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Sitemap.Name"
+msgid "Seo Sitemap"
+msgstr "Seo Sitemap"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Sitemap.Description"
+msgid "Provides SEO Sitemap features that enhances your site's discoverability."
+msgstr "Provides SEO Sitemap features that enhances your site's discoverability."
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Sitemap.Category"
+msgid "SEO"
+msgstr "SEO"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Sitemap.Tags.Name"
+msgid "Seo Sitemap for Tags"
+msgstr "Seo Sitemap for Tags"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Sitemap.Tags.Description"
+msgid "Provides SEO Sitemap features for tags that enhances your site's discoverability."
+msgstr "Provides SEO Sitemap features for tags that enhances your site's discoverability."
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Sitemap.Tags.Category"
+msgid "SEO"
+msgstr "SEO"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Robots.Name"
+msgid "Seo Robots"
+msgstr "Seo Robots"
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Robots.Description"
+msgid "Provides Robots features that enhances your site's discoverability."
+msgstr "Provides Robots features that enhances your site's discoverability."
+
+#: ~/Modules/IDeliverable.Seo/Module.txt
+#| msgid "IDeliverable.Seo.Robots.Category"
+msgid "SEO"
+msgstr "SEO"
+

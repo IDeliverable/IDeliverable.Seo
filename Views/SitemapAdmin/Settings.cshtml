@@ -1,0 +1,18 @@
+﻿@model IDeliverable.Seo.ViewModels.SeoSitemapSettingsViewModel
+@{
+    Layout.Title = T("Sitemap Settings");
+}
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <fieldset>
+        <legend>@T("Multiple Sitemaps")</legend>
+        <div class="form-group">
+            @Html.LabelFor(m => m.MaxEntriesPerSitemap, T("Maximum URLs Per Sitemap"))
+            @Html.TextBoxFor(m => m.MaxEntriesPerSitemap, new {@class = "text medium"})
+            @Html.Hint(T("If the number of URLs exceed this number, a sitemap index will be generated automatically."))
+        </div>
+    </fieldset>
+    <fieldset>
+        <button type="submit">@T("Save")</button>
+    </fieldset>
+}

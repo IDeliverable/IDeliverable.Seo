@@ -1,0 +1,22 @@
+﻿@model IDeliverable.Seo.Models.SeoSitemapPart
+<fieldset>
+    <legend>@T("SEO Sitemap")</legend>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ChangeFrequency, T("Change Frequency"))
+        @Html.EnumDropDownListFor(m => m.ChangeFrequency, T("(Default)"))
+        @Html.Hint(T("The frequency this content item is likely to change. This value provides general information to search engines and may not correlate exactly to how often they crawl the page."))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Priority, T("Priority"))
+        @Html.TextBoxFor(m => m.Priority, new { @class = "text small" })
+        @Html.Hint(T("The priority of this content item relative to other content on your site. Valid values range from 0.0 to 1.0. This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers."))
+    </div>
+    @if(!Model.PartExclude)
+    {
+        <div class="form-group">
+            @Html.CheckBoxFor(m => m.Exclude)
+            @Html.LabelFor(m => m.Exclude, T("Exclude from site map.").Text, new { @class = "forcheckbox" })
+            @Html.Hint(T("Exclude this content item from sitemap.xml."))
+        </div>
+    }
+</fieldset>

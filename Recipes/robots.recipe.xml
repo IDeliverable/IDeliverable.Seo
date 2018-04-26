@@ -1,0 +1,8 @@
+<Orchard>
+    <Recipe>
+        <Name>Robots</Name>
+        <Author>IDeliverable</Author>
+        <Description>Enables the Robots feature.</Description>
+    </Recipe>
+    <Feature Enable="IDeliverable.Seo.Robots" />
+</Orchard>

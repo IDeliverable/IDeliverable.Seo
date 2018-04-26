@@ -1,0 +1,20 @@
+﻿@model IDeliverable.Seo.ViewModels.SeoSitemapSearchEnginesViewModel
+@{
+    Layout.Title = T("Sitemap Settings");
+}
+@using (Html.BeginFormAntiForgeryPost())
+{
+    <fieldset>
+        <legend>@T("Search Engines")</legend>
+        <div class="form-group">
+            @Html.TextAreaFor(m => m.SearchEngines, new { @class = "text large" })
+            @Html.Hint(T("The search engine URLs to submit the sitemap to. Enter one search engine URL per line in the following format: http://searchengine.com/ping?sitemap={0}. The {0} placeholder will be automatically replaced with the actual URL to sitemap.xml.", "{0}"))
+        </div>
+    </fieldset>
+    <fieldset>
+        <button type="submit" name="submit.Save" value="submit.Save">@T("Save")</button>
+        <button type="submit" name="submit.SaveAndSubmit" value="submit.SaveAndSubmit">@T("Save and Ping")</button>
+        @Html.Hint(T("The Save and Ping button will ping the listed search engines above to let them know your sitemap has been updated."))
+        @Html.Hint(T("TIP: Create a Workflow to periodically ping the search engines."))
+    </fieldset>
+}

@@ -1,0 +1,18 @@
+<Orchard>
+    <Recipe>
+        <Name>Sitemap</Name>
+        <Author>IDeliverable</Author>
+        <Description>Enables the Sitemap feature and attaches the SeoSitemap Part to your Page content type.</Description>
+    </Recipe>
+    <Feature Enable="IDeliverable.Seo.Sitemap" />
+    <Metadata>
+        <Types>
+            <Page>
+                <SeoSitemapPart />
+            </Page>
+        </Types>
+        <Parts>
+            <SeoSitemapPart />
+        </Parts>
+    </Metadata>
+</Orchard>

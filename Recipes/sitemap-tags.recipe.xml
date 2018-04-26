@@ -1,0 +1,18 @@
+<Orchard>
+    <Recipe>
+        <Name>Sitemap for Tags</Name>
+        <Author>IDeliverable</Author>
+        <Description>Enables the Sitemap feature for Tags so that tags will be included as part of the sitemap.xml.</Description>
+    </Recipe>
+    <Feature Enable="IDeliverable.Seo.Sitemap.Tags" />
+    <Metadata>
+        <Types>
+            <Page>
+                <SeoSitemapPart />
+            </Page>
+        </Types>
+        <Parts>
+            <SeoSitemapPart />
+        </Parts>
+    </Metadata>
+</Orchard>

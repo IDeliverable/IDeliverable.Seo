@@ -1,0 +1,15 @@
+﻿@using Orchard.Utility.Extensions
+@using IDeliverable.Seo.Models
+@{ 
+    var part = (RoutesPart)Model.ContentPart;
+}
+@if (part.AlternateRoutes.Any())
+{
+    <div>Alternate Routes</div>
+    <ul>
+        @foreach (var route in part.AlternateRoutes)
+        {
+        <li><em>/@route.Alias</em></li>
+        }
+    </ul>
+}

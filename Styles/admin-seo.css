@@ -1,0 +1,20 @@
+﻿ul.horizontal-radios li {
+    float: left;
+    width: 91px;
+}
+
+ul.horizontal-radios li.label {
+    width: 55px;
+}
+
+ul.horizontal-radios li label.forcheckbox {
+    margin-left: 0px;
+}
+
+ul.horizontal-radios:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}

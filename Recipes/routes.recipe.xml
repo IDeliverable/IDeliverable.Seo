@@ -1,0 +1,8 @@
+<Orchard>
+    <Recipe>
+        <Name>Seo Redirect Routes</Name>
+        <Author>IDeliverable</Author>
+        <Description>Enables the Seo Routes feature which attaches the RoutesPart to the Page content type. The RoutesPart enables additional aliases to a content item with redirect options.</Description>
+    </Recipe>
+    <Feature Enable="IDeliverable.Seo.Routes" />
+</Orchard>

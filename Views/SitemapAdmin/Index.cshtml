@@ -1,0 +1,58 @@
+﻿@using IDeliverable.Seo.Models;
+@model IDeliverable.Seo.ViewModels.SitemapIndexViewModel
+@{
+    Layout.Title = T("Sitemap Entries");
+}
+@{
+    Style.Include("admin-sitemap.css");
+    Script.Require("ShapesBase");
+}
+@{
+    var handlerOptions = Model.Handlers.Select(x => new SelectListItem {Text = x.DisplayName.ToString(), Value = x.Name, Selected = Model.SelectedProvider == x.Name});
+}
+<div class="manage">
+    @Html.ActionLink(T("Add Custom Url").ToString(), "Create", "CustomSitemapEntry", new { Area = "IDeliverable.Seo" }, new { @class = "button primaryAction" })
+</div>
+@using (Html.BeginFormAntiForgeryPost()) {
+    <fieldset class="bulk-actions">
+        @Html.LabelFor(m => m.SelectedProvider, T("Filter by:"))
+        @Html.DropDownListFor(m => m.SelectedProvider, handlerOptions, T("Any (show all)").ToString())
+        <label for="orderResults" class="bulk-order">@T("Order by:")</label>
+        <select id="orderResults" name="@Html.FieldNameFor(m => m.OrderBy)">
+            @Html.SelectOption(Model.OrderBy, SitemapEntryOrderBy.Provider, T("Provider").ToString())
+            @Html.SelectOption(Model.OrderBy, SitemapEntryOrderBy.Priority, T("Priority").ToString())
+            @Html.SelectOption(Model.OrderBy, SitemapEntryOrderBy.ChangeFrequency, T("Change Frequency").ToString())
+            @Html.SelectOption(Model.OrderBy, SitemapEntryOrderBy.LastModified, T("Last Modified").ToString())
+            @Html.SelectOption(Model.OrderBy, SitemapEntryOrderBy.Url, T("Url").ToString())
+        </select>
+        <button type="submit" name="submit.Filter" value="yes">@T("Apply")</button>
+    </fieldset>
+    <table class="items">
+        <thead>
+            <tr>
+                <th>@T("Url")</th>
+                <th>@T("Change Frequency")</th>
+                <th>@T("Priority")</th>
+                <th>@T("Last Modified")</th>
+                <th>@T("Provider")</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model.Entries)
+            {
+                <tr>
+                    <td>@entry.Url</td>
+                    <td>@entry.ChangeFrequency</td>
+                    <td>@(entry.Priority != null ? entry.Priority.Value.ToString("f1") : "")</td>
+                    <td>@entry.LastModifiedUtc</td>
+                    <td>@entry.ProviderName</td>
+                    <td>
+                        <a href="@Url.Action("EditEntry", "SitemapAdmin", new { Area = "IDeliverable.Seo", url = entry.Url, provider = entry.ProviderName })">@T("Edit")</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@Display(Model.Pager)

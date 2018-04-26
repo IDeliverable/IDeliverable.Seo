@@ -1,0 +1,11 @@
+﻿@model IDeliverable.Seo.ViewModels.CustomSitemapEntryEditViewModel
+@{
+    Layout.Title = T("Create Custom URL");
+}
+@Html.ValidationSummary()
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.EditorForModel()
+    <button type="submit">@T("Save")</button>
+    @Html.ActionLink(T("Cancel").ToString(), "Index", "SitemapAdmin", null, new { @class = "button button-cancel" })
+}

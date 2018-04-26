@@ -1,0 +1,8 @@
+﻿@model IDeliverable.Seo.Settings.SeoSitemapPartSettings
+<fieldset>
+    <div>
+        @Html.CheckBoxFor(m => m.Exclude)
+        @Html.LabelFor(m => m.Exclude, T("Exclude from site map.").Text, new { @class = "forcheckbox" })
+        @Html.Hint(T("All content items of this type will be excluded from sitemap.xml."))
+    <div>
+</fieldset>

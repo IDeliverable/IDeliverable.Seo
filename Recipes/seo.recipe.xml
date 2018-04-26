@@ -1,0 +1,18 @@
+<Orchard>
+    <Recipe>
+        <Name>Seo Part</Name>
+        <Author>IDeliverable</Author>
+        <Description>Attaches the Seo Part to your Page content type. The Seo Part enables control over the title tag, meta keywords and meta description for your content.</Description>
+    </Recipe>
+    <Feature Enable="IDeliverable.Seo" />
+    <Metadata>
+        <Types>
+            <Page>
+                <SeoPart />
+            </Page>
+        </Types>
+        <Parts>
+            <SeoPart />
+        </Parts>
+    </Metadata>
+</Orchard>

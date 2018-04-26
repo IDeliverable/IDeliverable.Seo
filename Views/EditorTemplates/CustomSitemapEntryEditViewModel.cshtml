@@ -1,0 +1,24 @@
+﻿@model IDeliverable.Seo.ViewModels.CustomSitemapEntryEditViewModel
+@Html.HiddenFor(m => m.ReturnUrl)
+<fieldset>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Url, T("URL"))
+        @Html.TextBoxFor(m => m.Url, new {@class = "text large"})
+        @Html.Hint(T("The custom URL you want to add to the sitemap."))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ChangeFrequency, T("Change Frequency"))
+        @Html.EnumDropDownListFor(m => m.ChangeFrequency, "Select change frequency...")
+        @Html.Hint(T("Optionally select the change frequency for this URL."))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Priority, T("Priority"))
+        @Html.TextBoxFor(m => m.Priority, new {@class = "text small"})
+        @Html.Hint(T("Optionally provide a priority between {0} and {1} relative to the other URLs of your site.", 0f.ToString("f1"), 1f.ToString("f1")))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastModifiedUtc, T("Last Modified UTC"))
+        @Html.EditorFor(m => m.LastModifiedUtc)
+        @Html.Hint(T("Optionally provide a last modified date of this URL."))
+    </div>
+</fieldset>
