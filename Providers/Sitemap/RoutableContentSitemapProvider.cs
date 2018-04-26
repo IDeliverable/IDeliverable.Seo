@@ -14,13 +14,13 @@ namespace IDeliverable.Seo.Providers.Sitemap
     [OrchardFeature("IDeliverable.Seo.Sitemap")]
     public class RoutableContentSitemapProvider : SitemapProviderBase
     {
-        private readonly IContentManager mContentManager;
-        private readonly UrlHelper mUrlHelper;
+        private readonly IContentManager _contentManager;
+        private readonly UrlHelper _urlHelper;
 
         public RoutableContentSitemapProvider(IContentManager contentManager, UrlHelper urlHelper, ISitemapEntryHandler sitemapEntryHandlers) : base(sitemapEntryHandlers)
         {
-            mContentManager = contentManager;
-            mUrlHelper = urlHelper;
+            _contentManager = contentManager;
+            _urlHelper = urlHelper;
         }
 
         public override string Name => "RoutableContent";
@@ -28,7 +28,7 @@ namespace IDeliverable.Seo.Providers.Sitemap
 
         public override void GetSitemapEntries(SitemapContext context)
         {
-            var contentItems = mContentManager.Query<AutoroutePart, AutoroutePartRecord>(VersionOptions.Published).List().ToArray();
+            var contentItems = _contentManager.Query<AutoroutePart, AutoroutePartRecord>(VersionOptions.Published).List().ToArray();
 
             foreach (var contentItem in contentItems)
             {
@@ -43,7 +43,7 @@ namespace IDeliverable.Seo.Providers.Sitemap
 
                 var entry = CreateEntry(
                     contentItem,
-                    mUrlHelper.ItemDisplayUrl(contentItem),
+                    _urlHelper.ItemDisplayUrl(contentItem),
                     contentItem.As<ICommonPart>()?.ModifiedUtc,
                     changeFrequency,
                     priority);
@@ -59,7 +59,7 @@ namespace IDeliverable.Seo.Providers.Sitemap
                 return;
 
             var contentId = XmlHelper.Parse<int>(context.Entry.Context);
-            context.Metadata.EditRouteValues = GetContentEditRouteValues(mContentManager, contentId);
+            context.Metadata.EditRouteValues = GetContentEditRouteValues(_contentManager, contentId);
         }
     }
 }

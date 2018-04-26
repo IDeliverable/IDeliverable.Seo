@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using IDeliverable.Seo.Helpers;
-using IDeliverable.Seo.Licensing;
 using IDeliverable.Seo.Models;
 using IDeliverable.Seo.Services;
 using IDeliverable.Seo.ViewModels;
@@ -31,9 +29,6 @@ namespace IDeliverable.Seo.Drivers
 
         protected override DriverResult Editor(SeoPart part, IUpdateModel updater, dynamic shapeHelper)
         {
-            if (!LicenseValidation.GetLicenseIsValid())
-                return ContentShape("Parts_Seo_Edit_InvalidLicense", () => shapeHelper.Parts_Seo_Edit_InvalidLicense());
-
             return ContentShape("Parts_Seo_Edit", () =>
             {
                 var robots = part.MetaRobots?.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
@@ -63,9 +58,6 @@ namespace IDeliverable.Seo.Drivers
 
         protected override DriverResult Display(SeoPart part, string displayType, dynamic shapeHelper)
         {
-            if (!LicenseValidation.GetLicenseIsValid())
-                return ContentShape("Parts_Seo_InvalidLicense", () => shapeHelper.Parts_Seo_InvalidLicense());
-
             return ContentShape("Parts_Seo", () =>
             {
                 // Title.

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using IDeliverable.Seo.Licensing;
 using IDeliverable.Seo.Models;
 using Orchard.Autoroute.Models;
 using Orchard.ContentManagement;
@@ -20,9 +19,6 @@ namespace IDeliverable.Seo.Controllers
 
         public ActionResult Redirect(int id, int? index)
         {
-            if (!LicenseValidation.GetLicenseIsValid())
-                return new InvalidLicenseResult();
-
             var contentItem = _contentManager.Get(id, VersionOptions.Published);
 
             if (contentItem == null)

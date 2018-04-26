@@ -9,11 +9,11 @@ namespace IDeliverable.Seo.Services
     [OrchardFeature("IDeliverable.Seo.Sitemap")]
     public class SitemapService : ISitemapService
     {
-        private readonly IEnumerable<ISitemapProvider> mHandlers;
+        private readonly IEnumerable<ISitemapProvider> _handlers;
 
         public SitemapService(IEnumerable<ISitemapProvider> handlers)
         {
-            mHandlers = handlers;
+            _handlers = handlers;
         }
 
         public IEnumerable<SitemapEntry> GetEntries()
@@ -37,12 +37,12 @@ namespace IDeliverable.Seo.Services
 
         public IEnumerable<ISitemapProvider> GetHandlers()
         {
-            return mHandlers;
+            return _handlers;
         }
 
         private void Invoke(Action<ISitemapProvider> action)
         {
-            foreach (var handler in mHandlers)
+            foreach (var handler in _handlers)
             {
                 action(handler);
             }

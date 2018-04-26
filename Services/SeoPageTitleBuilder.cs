@@ -12,18 +12,18 @@ namespace IDeliverable.Seo.Services
     {
         public SeoPageTitleBuilder(ISiteService siteService)
         {
-            mSiteService = siteService;
-            mTitleParts = new List<string>(5);
+            _siteService = siteService;
+            _titleParts = new List<string>(5);
         }
 
-        private readonly ISiteService mSiteService;
-        private readonly List<string> mTitleParts;
-        private string mTitleSeparator;
-        private string mTitle;
+        private readonly ISiteService _siteService;
+        private readonly List<string> _titleParts;
+        private string _titleSeparator;
+        private string _title;
 
         public void SetTitle(string title)
         {
-            mTitle = title;
+            _title = title;
         }
 
         void IPageTitleBuilder.AddTitleParts(params string[] titleParts)
@@ -31,7 +31,7 @@ namespace IDeliverable.Seo.Services
             if (titleParts.Length > 0)
                 foreach (var titlePart in titleParts)
                     if (!String.IsNullOrEmpty(titlePart))
-                        mTitleParts.Add(titlePart);
+                        _titleParts.Add(titlePart);
         }
 
         void IPageTitleBuilder.AppendTitleParts(params string[] titleParts)
@@ -39,22 +39,22 @@ namespace IDeliverable.Seo.Services
             if (titleParts.Length > 0)
                 foreach (var titlePart in titleParts)
                     if (!String.IsNullOrEmpty(titlePart))
-                        mTitleParts.Insert(0, titlePart);
+                        _titleParts.Insert(0, titlePart);
         }
 
         string IPageTitleBuilder.GenerateTitle()
         {
-            if (mTitle != null)
-                return mTitle;
+            if (_title != null)
+                return _title;
 
-            if (mTitleSeparator == null)
+            if (_titleSeparator == null)
             {
-                mTitleSeparator = mSiteService.GetSiteSettings().PageTitleSeparator;
+                _titleSeparator = _siteService.GetSiteSettings().PageTitleSeparator;
             }
 
-            return mTitleParts.Count == 0
+            return _titleParts.Count == 0
                 ? String.Empty
-                : String.Join(mTitleSeparator, mTitleParts.AsEnumerable().Reverse().ToArray());
+                : String.Join(_titleSeparator, _titleParts.AsEnumerable().Reverse().ToArray());
         }
     }
 }

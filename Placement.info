@@ -1,16 +1,11 @@
 ﻿<Placement>
     <Place Parts_Seo_Edit="Content#Seo:8"
-           Parts_Seo_Edit_InvalidLicense="Content:0"
-           Parts_SeoSitemap_Edit="Content#Seo:9"
-           Parts_SeoSitemap_Edit_InvalidLicense="Content:0" />
-    
-    <Place Parts_Seo_License_Edit="Content:0" />
-    <Place Parts_Routes_Edit="Content:before.52"
-           Parts_Routes_Edit_InvalidLicense="Content:before.52" />
+           Parts_SeoSitemap_Edit="Content#Seo:9" />
+
+    <Place Parts_Routes_Edit="Content:before.52" />
 
     <Match DisplayType="Detail">
-        <Place Parts_Seo="Meta:0"
-               Parts_Seo_InvalidLicense="Content:0"/>
+        <Place Parts_Seo="Meta:0" />
     </Match>
 
   <Match DisplayType="SummaryAdmin">

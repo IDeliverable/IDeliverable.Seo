@@ -1,8 +1,0 @@
-﻿@{
-    var contentPart = Model.ContentPart;
-    var contentPartName = contentPart != null ? (string)contentPart.PartDefinition.Name : default(string);
-    var message = contentPartName != null
-        ? "No license key or an invalid license key for IDeliverable.Seo was provided. ({0})"
-        : "No license key or an invalid license key for IDeliverable.Seo was provided.";
-}
-<div class="message message-Warning">@T(message, contentPartName)</div>

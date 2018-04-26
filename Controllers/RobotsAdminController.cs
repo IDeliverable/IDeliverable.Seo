@@ -14,11 +14,11 @@ namespace IDeliverable.Seo.Controllers
     [Admin]
     public class RobotsAdminController : Controller
     {
-        private readonly IOrchardServices mOrchardServices;
+        private readonly IOrchardServices _orchardServices;
 
         public RobotsAdminController(IOrchardServices orchardServices)
         {
-            mOrchardServices = orchardServices;
+            _orchardServices = orchardServices;
             T = NullLocalizer.Instance;
         }
 
@@ -26,7 +26,7 @@ namespace IDeliverable.Seo.Controllers
 
         public ActionResult Index()
         {
-            var settingsPart = mOrchardServices.WorkContext.CurrentSite.As<RobotsSettingsPart>();
+            var settingsPart = _orchardServices.WorkContext.CurrentSite.As<RobotsSettingsPart>();
             var viewModel = new RobotsViewModel
             {
                 RobotsTxt = settingsPart.RobotsTxt
@@ -40,10 +40,10 @@ namespace IDeliverable.Seo.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
-            var settingsPart = mOrchardServices.WorkContext.CurrentSite.As<RobotsSettingsPart>();
+            var settingsPart = _orchardServices.WorkContext.CurrentSite.As<RobotsSettingsPart>();
             settingsPart.RobotsTxt = viewModel.RobotsTxt;
             
-            mOrchardServices.Notifier.Information(T("Your Robots information has been saved."));
+            _orchardServices.Notifier.Information(T("Your Robots information has been saved."));
             return RedirectToAction("Index");
         }
     }
