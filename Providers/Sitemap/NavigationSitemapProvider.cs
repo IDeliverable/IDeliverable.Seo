@@ -15,15 +15,15 @@ namespace IDeliverable.Seo.Providers.Sitemap
     [OrchardFeature("IDeliverable.Seo.Sitemap")]
     public class NavigationSitemapProvider : SitemapProviderBase
     {
-        private readonly IContentManager mContentManager;
-        private readonly IMenuService mMenuService;
-        private readonly INavigationManager mNavigationManager;
+        private readonly IContentManager _contentManager;
+        private readonly IMenuService _menuService;
+        private readonly INavigationManager _navigationManager;
 
         public NavigationSitemapProvider(IContentManager contentManager, IMenuService menuService, INavigationManager navigationManager, ISitemapEntryHandler sitemapEntryHandlers) : base(sitemapEntryHandlers)
         {
-            mContentManager = contentManager;
-            mMenuService = menuService;
-            mNavigationManager = navigationManager;
+            _contentManager = contentManager;
+            _menuService = menuService;
+            _navigationManager = navigationManager;
         }
 
         public override string Name => "Navigation";
@@ -68,13 +68,13 @@ namespace IDeliverable.Seo.Providers.Sitemap
                 return;
 
             var contentId = XmlHelper.Parse<int>(context.Entry.Context);
-            context.Metadata.EditRouteValues = GetContentEditRouteValues(mContentManager, contentId);
+            context.Metadata.EditRouteValues = GetContentEditRouteValues(_contentManager, contentId);
         }
 
         private IEnumerable<MenuItem> GetAllMenuItems()
         {
-            var menus = mMenuService.GetMenus();
-            return menus.SelectMany(menu => mNavigationManager.BuildMenu(menu));
+            var menus = _menuService.GetMenus();
+            return menus.SelectMany(menu => _navigationManager.BuildMenu(menu));
         }
     }
 }

@@ -13,15 +13,15 @@ namespace IDeliverable.Seo.Handlers
     [OrchardFeature("IDeliverable.Seo.Robots")]
     public class RobotsSettingsPartHandler : ContentHandler
     {
-        private readonly IOrchardServices mOrchardServices;
-        private readonly IFeatureManager mFeatureManager;
-        private readonly UrlHelper mUrlHelper;
+        private readonly IOrchardServices _orchardServices;
+        private readonly IFeatureManager _featureManager;
+        private readonly UrlHelper _urlHelper;
 
         public RobotsSettingsPartHandler(IOrchardServices orchardServices, IFeatureManager featureManager, UrlHelper urlHelper)
         {
-            mOrchardServices = orchardServices;
-            mFeatureManager = featureManager;
-            mUrlHelper = urlHelper;
+            _orchardServices = orchardServices;
+            _featureManager = featureManager;
+            _urlHelper = urlHelper;
             Filters.Add(new ActivatingFilter<RobotsSettingsPart>("Site"));
 
             OnActivated<RobotsSettingsPart>(SetupLazyFields);
@@ -39,10 +39,10 @@ namespace IDeliverable.Seo.Handlers
 User-agent: *
 Disallow: 
 {1}";
-            var absoluteUrl = mOrchardServices.WorkContext.CurrentSite.BaseUrl;
-            var isSitemapEnabled = mFeatureManager.GetEnabledFeatures().Any(x => x.Id == "IDeliverable.Seo.Sitemap");
+            var absoluteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
+            var isSitemapEnabled = _featureManager.GetEnabledFeatures().Any(x => x.Id == "IDeliverable.Seo.Sitemap");
             var sitemapEntry = isSitemapEnabled
-                ? $"Sitemap: {mUrlHelper.AbsoluteAction("Index", "Sitemap", new { Area = "IDeliverable.Seo" })}"
+                ? $"Sitemap: {_urlHelper.AbsoluteAction("Index", "Sitemap", new { Area = "IDeliverable.Seo" })}"
                 : default(string);
 
             return String.Format(template, absoluteUrl, sitemapEntry);

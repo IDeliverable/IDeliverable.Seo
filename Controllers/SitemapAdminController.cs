@@ -20,15 +20,15 @@ namespace IDeliverable.Seo.Controllers
     [Admin]
     public class SitemapAdminController : Controller
     {
-        private readonly IOrchardServices mOrchardServices;
-        private readonly ISitemapService mSitemapService;
-        private readonly ISitemapSubmitter mSitemapSubmitter;
+        private readonly IOrchardServices _orchardServices;
+        private readonly ISitemapService _sitemapService;
+        private readonly ISitemapSubmitter _sitemapSubmitter;
 
         public SitemapAdminController(IOrchardServices orchardServices, ISitemapService sitemapService, ISitemapSubmitter sitemapSubmitter)
         {
-            mOrchardServices = orchardServices;
-            mSitemapService = sitemapService;
-            mSitemapSubmitter = sitemapSubmitter;
+            _orchardServices = orchardServices;
+            _sitemapService = sitemapService;
+            _sitemapSubmitter = sitemapSubmitter;
             T = NullLocalizer.Instance;
         }
 
@@ -36,8 +36,8 @@ namespace IDeliverable.Seo.Controllers
 
         public ActionResult Index(PagerParameters pagerParameters, string provider = null, SitemapEntryOrderBy orderBy = SitemapEntryOrderBy.Provider)
         {
-            var pager = new Pager(mOrchardServices.WorkContext.CurrentSite, pagerParameters);
-            var query = mSitemapService.GetEntries();
+            var pager = new Pager(_orchardServices.WorkContext.CurrentSite, pagerParameters);
+            var query = _sitemapService.GetEntries();
 
             if (!String.IsNullOrWhiteSpace(provider))
             {
@@ -68,11 +68,11 @@ namespace IDeliverable.Seo.Controllers
             var pageOfEntries = query.Skip(pager.GetStartIndex()).Take(pager.Page * pager.PageSize);
             var viewModel = new SitemapIndexViewModel
             {
-                Handlers = mSitemapService.GetHandlers().ToArray(),
+                Handlers = _sitemapService.GetHandlers().ToArray(),
                 Entries = pageOfEntries,
                 SelectedProvider = provider,
                 OrderBy = orderBy,
-                Pager = mOrchardServices.New.Pager(pager).TotalItemCount(totalCount)
+                Pager = _orchardServices.New.Pager(pager).TotalItemCount(totalCount)
             };
             return View(viewModel);
         }
@@ -99,15 +99,15 @@ namespace IDeliverable.Seo.Controllers
 
         public ActionResult EditEntry(string url, string provider)
         {
-            var entry = mSitemapService.GetEntry(url, provider);
-            var editRouteValues = mSitemapService.GetEntryMetadata(entry).EditRouteValues;
+            var entry = _sitemapService.GetEntry(url, provider);
+            var editRouteValues = _sitemapService.GetEntryMetadata(entry).EditRouteValues;
             var editUrl = Url.RouteUrl(editRouteValues) + "?returnUrl=" + Url.Action("Index");
             return Redirect(editUrl);
         }
 
         public ActionResult Settings()
         {
-            var settingsPart = mOrchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
+            var settingsPart = _orchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
             var viewModel = new SeoSitemapSettingsViewModel
             {
                 MaxEntriesPerSitemap = settingsPart.MaxEntriesPerSitemap
@@ -122,15 +122,15 @@ namespace IDeliverable.Seo.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
-            var settingsPart = mOrchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
+            var settingsPart = _orchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
             settingsPart.MaxEntriesPerSitemap = viewModel.MaxEntriesPerSitemap;
-            mOrchardServices.Notifier.Information(T("Sitemap Settings have been saved."));
+            _orchardServices.Notifier.Information(T("Sitemap Settings have been saved."));
             return Redirect("Settings");
         }
 
         public ActionResult SearchEngines()
         {
-            var settingsPart = mOrchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
+            var settingsPart = _orchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
             var viewModel = new SeoSitemapSearchEnginesViewModel
             {
                 SearchEngines = settingsPart.SearchEngines.JoinLines(),
@@ -146,9 +146,9 @@ namespace IDeliverable.Seo.Controllers
             if(!ModelState.IsValid)
                 return View(viewModel);
 
-            var settingsPart = mOrchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
+            var settingsPart = _orchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
             settingsPart.SearchEngines = viewModel.SearchEngines.SplitLines();
-            mOrchardServices.Notifier.Information(T("Sitemap Search Engine Settings have been saved."));
+            _orchardServices.Notifier.Information(T("Sitemap Search Engine Settings have been saved."));
             return Redirect("SearchEngines");
         }
 
@@ -161,18 +161,18 @@ namespace IDeliverable.Seo.Controllers
 
             if (ModelState.IsValid)
             {
-                var settingsPart = mOrchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
+                var settingsPart = _orchardServices.WorkContext.CurrentSite.As<SeoSitemapSettingsPart>();
                 var searchEngines = settingsPart.SearchEngines;
-                var submissionResults = mSitemapSubmitter.SubmitSitemap(searchEngines);
+                var submissionResults = _sitemapSubmitter.SubmitSitemap(searchEngines);
 
                 foreach (var result in submissionResults.Results)
                 {
                     if(result.IsSuccessStatusCode)
-                        mOrchardServices.Notifier.Information(T("Successfully pinged {0}.", result.SearchEngineUrl));
+                        _orchardServices.Notifier.Information(T("Successfully pinged {0}.", result.SearchEngineUrl));
                     else if(result.Exception == null)
-                        mOrchardServices.Notifier.Warning(T("Failed to ping {0}. Response status code: {1}", result.SearchEngineUrl, result.StatusCode));
+                        _orchardServices.Notifier.Warning(T("Failed to ping {0}. Response status code: {1}", result.SearchEngineUrl, result.StatusCode));
                     else
-                        mOrchardServices.Notifier.Error(T("Failed to ping {0}. Exception: {1}", result.SearchEngineUrl, result.Exception.Message));
+                        _orchardServices.Notifier.Error(T("Failed to ping {0}. Exception: {1}", result.SearchEngineUrl, result.Exception.Message));
                 }
             }
 

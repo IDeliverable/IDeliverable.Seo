@@ -22,11 +22,11 @@ namespace IDeliverable.Seo.Controllers
     [Admin]
     public class CustomSitemapEntryController : Controller
     {
-        private readonly INotifier mNotifier;
-        private readonly IDateLocalizationServices mDateLocalizationServices;
-        private readonly IClock mClock;
-        private readonly IOrchardServices mOrchardServices;
-        private readonly IRepository<CustomSitemapEntryRecord> mCustomSitemapEntryRepository;
+        private readonly INotifier _notifier;
+        private readonly IDateLocalizationServices _dateLocalizationServices;
+        private readonly IClock _clock;
+        private readonly IOrchardServices _orchardServices;
+        private readonly IRepository<CustomSitemapEntryRecord> _customSitemapEntryRepository;
 
         public CustomSitemapEntryController
         (
@@ -36,11 +36,11 @@ namespace IDeliverable.Seo.Controllers
             IOrchardServices orchardServices,
             IRepository<CustomSitemapEntryRecord> customSitemapEntryRepository)
         {
-            mNotifier = notifier;
-            mDateLocalizationServices = dateLocalizationServices;
-            mClock = clock;
-            mOrchardServices = orchardServices;
-            mCustomSitemapEntryRepository = customSitemapEntryRepository;
+            _notifier = notifier;
+            _dateLocalizationServices = dateLocalizationServices;
+            _clock = clock;
+            _orchardServices = orchardServices;
+            _customSitemapEntryRepository = customSitemapEntryRepository;
             T = NullLocalizer.Instance;
         }
 
@@ -48,8 +48,8 @@ namespace IDeliverable.Seo.Controllers
 
         public ActionResult Index(PagerParameters pagerParameters, CustomSitemapEntryOrderBy orderBy = CustomSitemapEntryOrderBy.Url)
         {
-            var pager = new Pager(mOrchardServices.WorkContext.CurrentSite, pagerParameters);
-            var query = mCustomSitemapEntryRepository.Table;
+            var pager = new Pager(_orchardServices.WorkContext.CurrentSite, pagerParameters);
+            var query = _customSitemapEntryRepository.Table;
 
             switch (orderBy)
             {
@@ -82,7 +82,7 @@ namespace IDeliverable.Seo.Controllers
             {
                 Entries = pageOfEntries,
                 OrderBy = orderBy,
-                Pager = mOrchardServices.New.Pager(pager).TotalItemCount(totalCount)
+                Pager = _orchardServices.New.Pager(pager).TotalItemCount(totalCount)
             };
             return View(viewModel);
         }
@@ -98,12 +98,12 @@ namespace IDeliverable.Seo.Controllers
                 {
                     case CustomSitemapEntryBulkAction.Delete:
                         var selectedEntries = viewModel.Entries.Where(x => x.IsSelected).Select(x => x.Id).ToList();
-                        var entries = mCustomSitemapEntryRepository.Table.Where(x => selectedEntries.Contains(x.Id)).ToList();
+                        var entries = _customSitemapEntryRepository.Table.Where(x => selectedEntries.Contains(x.Id)).ToList();
                         foreach (var entry in entries)
                         {
-                            mCustomSitemapEntryRepository.Delete(entry);
+                            _customSitemapEntryRepository.Delete(entry);
                         }
-                        mNotifier.Information(T.Plural("No URLs have been deleted.", "The selected URL has been successfully deleted.", "The selected URLs have been succesfully deleted.", entries.Count));
+                        _notifier.Information(T.Plural("No URLs have been deleted.", "The selected URL has been successfully deleted.", "The selected URLs have been succesfully deleted.", entries.Count));
                         break;
                 }
 
@@ -114,14 +114,14 @@ namespace IDeliverable.Seo.Controllers
 
         public ActionResult Create()
         {
-            var now = mClock.UtcNow;
+            var now = _clock.UtcNow;
             var localizationOptions = new DateLocalizationOptions { EnableTimeZoneConversion = true };
             var viewModel = new CustomSitemapEntryEditViewModel
             {
                 LastModifiedUtc = new DateTimeEditor
                 {
-                    Date = mDateLocalizationServices.ConvertToLocalizedDateString(now, localizationOptions),
-                    Time = mDateLocalizationServices.ConvertToLocalizedTimeString(now, localizationOptions),
+                    Date = _dateLocalizationServices.ConvertToLocalizedDateString(now, localizationOptions),
+                    Time = _dateLocalizationServices.ConvertToLocalizedTimeString(now, localizationOptions),
                     ShowDate = true,
                     ShowTime = true
                 }
@@ -135,24 +135,24 @@ namespace IDeliverable.Seo.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
-            mCustomSitemapEntryRepository.Create(new CustomSitemapEntryRecord
+            _customSitemapEntryRepository.Create(new CustomSitemapEntryRecord
             {
                 Url = viewModel.Url,
                 ChangeFrequency = viewModel.ChangeFrequency,
                 Priority = viewModel.Priority,
-                LastModifiedUtc = mDateLocalizationServices.ConvertFromLocalizedString(
+                LastModifiedUtc = _dateLocalizationServices.ConvertFromLocalizedString(
                     viewModel.LastModifiedUtc.Date,
                     viewModel.LastModifiedUtc.Time,
                     new DateLocalizationOptions { EnableTimeZoneConversion = true })
             });
 
-            mNotifier.Information(T("That custom URL has been created."));
+            _notifier.Information(T("That custom URL has been created."));
             return RedirectToAction("Index", "SitemapAdmin");
         }
 
         public ActionResult Edit(int id, string returnUrl)
         {
-            var entry = mCustomSitemapEntryRepository.Get(id);
+            var entry = _customSitemapEntryRepository.Get(id);
             var viewModel = new CustomSitemapEntryEditViewModel
             {
                 Url = entry.Url,
@@ -161,8 +161,8 @@ namespace IDeliverable.Seo.Controllers
                 LastModifiedUtc = entry.LastModifiedUtc != null
                 ? new DateTimeEditor
                 {
-                    Date = mDateLocalizationServices.ConvertToLocalizedDateString(entry.LastModifiedUtc.Value, new DateLocalizationOptions { EnableTimeZoneConversion = true }),
-                    Time = mDateLocalizationServices.ConvertToLocalizedTimeString(entry.LastModifiedUtc.Value, new DateLocalizationOptions { EnableTimeZoneConversion = true }),
+                    Date = _dateLocalizationServices.ConvertToLocalizedDateString(entry.LastModifiedUtc.Value, new DateLocalizationOptions { EnableTimeZoneConversion = true }),
+                    Time = _dateLocalizationServices.ConvertToLocalizedTimeString(entry.LastModifiedUtc.Value, new DateLocalizationOptions { EnableTimeZoneConversion = true }),
                     ShowDate = true,
                     ShowTime = true
                 }
@@ -179,17 +179,17 @@ namespace IDeliverable.Seo.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);
 
-            var entry = mCustomSitemapEntryRepository.Get(id);
+            var entry = _customSitemapEntryRepository.Get(id);
 
             entry.Url = viewModel.Url;
             entry.ChangeFrequency = viewModel.ChangeFrequency;
             entry.Priority = viewModel.Priority;
-            entry.LastModifiedUtc = mDateLocalizationServices.ConvertFromLocalizedString(
+            entry.LastModifiedUtc = _dateLocalizationServices.ConvertFromLocalizedString(
                 viewModel.LastModifiedUtc.Date,
                 viewModel.LastModifiedUtc.Time,
                 new DateLocalizationOptions { EnableTimeZoneConversion = true });
 
-            mNotifier.Information(T("That custom URL has been updated."));
+            _notifier.Information(T("That custom URL has been updated."));
 
             return Url.IsLocalUrl(viewModel.ReturnUrl)
                 ? (ActionResult)Redirect(viewModel.ReturnUrl)
@@ -199,10 +199,10 @@ namespace IDeliverable.Seo.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var entry = mCustomSitemapEntryRepository.Get(id);
-            mCustomSitemapEntryRepository.Delete(entry);
+            var entry = _customSitemapEntryRepository.Get(id);
+            _customSitemapEntryRepository.Delete(entry);
 
-            mNotifier.Information(T("That custom URL has been deleted."));
+            _notifier.Information(T("That custom URL has been deleted."));
             return RedirectToAction("Index", "CustomSitemapEntry");
         }
     }

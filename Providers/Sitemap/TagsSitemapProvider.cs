@@ -13,13 +13,13 @@ namespace IDeliverable.Seo.Providers.Sitemap
     [OrchardFeature("IDeliverable.Seo.Sitemap.Tags")]
     public class TagsSitemapProvider : SitemapProviderBase
     {
-        readonly ITagService mTagService;
-        private readonly UrlHelper mUrlHelper;
+        readonly ITagService _tagService;
+        private readonly UrlHelper _urlHelper;
 
         public TagsSitemapProvider(ITagService tagService, UrlHelper urlHelper, ISitemapEntryHandler sitemapEntryHandlers) : base(sitemapEntryHandlers)
         {
-            mTagService = tagService;
-            mUrlHelper = urlHelper;
+            _tagService = tagService;
+            _urlHelper = urlHelper;
         }
 
         public override string Name => "Tags";
@@ -27,7 +27,7 @@ namespace IDeliverable.Seo.Providers.Sitemap
 
         public override void GetSitemapEntries(SitemapContext context)
         {
-            var tags = mTagService.GetTags();
+            var tags = _tagService.GetTags();
             foreach (var tag in tags)
             {
                 context.Entries.Add(ToSitemapEntry(tag));
@@ -51,7 +51,7 @@ namespace IDeliverable.Seo.Providers.Sitemap
 
         private SitemapEntry ToSitemapEntry(TagRecord tag)
         {
-            var url = mUrlHelper.Action("Search", "Home", new { Area = "Orchard.Tags", TagName = tag.TagName });
+            var url = _urlHelper.Action("Search", "Home", new { Area = "Orchard.Tags", TagName = tag.TagName });
             var entry = CreateEntry(tag, url, changeFrequency: ChangeFrequency.Daily);
             entry.Context = tag.Id.ToString();
             return entry;

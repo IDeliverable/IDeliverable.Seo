@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IDeliverable.Seo.Licensing;
 using IDeliverable.Seo.Models;
 using IDeliverable.Seo.ViewModels;
 using Orchard.Autoroute.Models;
@@ -29,9 +28,6 @@ namespace IDeliverable.Seo.Drivers
 
         protected override DriverResult Editor(RoutesPart part, IUpdateModel updater, dynamic shapeHelper)
         {
-            if (!LicenseValidation.GetLicenseIsValid())
-                return ContentShape("Parts_Routes_Edit_InvalidLicense", () => shapeHelper.Parts_Routes_Edit_InvalidLicense());
-
             return ContentShape("Parts_Routes_Edit", () =>
             {
                 var viewModel = new RoutesViewModel

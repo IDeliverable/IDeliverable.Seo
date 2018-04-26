@@ -11,16 +11,16 @@ namespace IDeliverable.Seo.Services
 {
     public class SitemapSubmitter : Component, ISitemapSubmitter
     {
-        private readonly UrlHelper mUrlHelper;
+        private readonly UrlHelper _urlHelper;
 
         public SitemapSubmitter(UrlHelper urlHelper)
         {
-            mUrlHelper = urlHelper;
+            _urlHelper = urlHelper;
         }
 
         public SubmitSitemapResult SubmitSitemap(IEnumerable<string> searchEngineUrls)
         {
-            var sitemapUrl = mUrlHelper.AbsoluteAction("Index", "Sitemap", new { Area = "IDeliverable.Seo" });
+            var sitemapUrl = _urlHelper.AbsoluteAction("Index", "Sitemap", new { Area = "IDeliverable.Seo" });
             var result = new SubmitSitemapResult();
 
             foreach (var searchEngineUrl in searchEngineUrls)

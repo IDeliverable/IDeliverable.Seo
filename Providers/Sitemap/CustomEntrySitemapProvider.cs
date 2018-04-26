@@ -13,13 +13,13 @@ namespace IDeliverable.Seo.Providers.Sitemap
     [OrchardFeature("IDeliverable.Seo.Sitemap")]
     public class CustomEntrySitemapProvider : SitemapProviderBase
     {
-        private readonly UrlHelper mUrlHelper;
-        private readonly IRepository<CustomSitemapEntryRecord> mCustomSitemapEntryRepository;
+        private readonly UrlHelper _urlHelper;
+        private readonly IRepository<CustomSitemapEntryRecord> _customSitemapEntryRepository;
 
         public CustomEntrySitemapProvider(UrlHelper urlHelper, IRepository<CustomSitemapEntryRecord> customSitemapEntryRepository, ISitemapEntryHandler sitemapEntryHandlers) : base(sitemapEntryHandlers)
         {
-            mUrlHelper = urlHelper;
-            mCustomSitemapEntryRepository = customSitemapEntryRepository;
+            _urlHelper = urlHelper;
+            _customSitemapEntryRepository = customSitemapEntryRepository;
         }
 
         public override string Name => "CustomEntry";
@@ -27,13 +27,13 @@ namespace IDeliverable.Seo.Providers.Sitemap
 
         public override void GetSitemapEntries(SitemapContext context)
         {
-            var records = mCustomSitemapEntryRepository.Table.ToArray();
+            var records = _customSitemapEntryRepository.Table.ToArray();
 
             foreach (var record in records)
             {
                 var entry = CreateEntry(
                     record,
-                    record.Url.StartsWith("~") || record.Url.StartsWith("/") ? mUrlHelper.Content(record.Url) : record.Url,
+                    record.Url.StartsWith("~") || record.Url.StartsWith("/") ? _urlHelper.Content(record.Url) : record.Url,
                     record.LastModifiedUtc,
                     record.ChangeFrequency,
                     record.Priority);

@@ -19,10 +19,10 @@ namespace IDeliverable.Seo.Providers.Sitemap
     {
         public MediaLibraryPickerSitemapEntryHandler(IStorageProvider storageProvider)
         {
-            mStorageProvider = storageProvider;
+            _storageProvider = storageProvider;
         }
 
-        private readonly IStorageProvider mStorageProvider;
+        private readonly IStorageProvider _storageProvider;
 
         public override void EntryCreated(SitemapEntryCreatedContext context)
         {
@@ -35,7 +35,7 @@ namespace IDeliverable.Seo.Providers.Sitemap
             var imageParts = mediaLibraryPickerFields.SelectMany(x => x.MediaParts).Where(x => x.Is<ImagePart>()).ToList();
             var imageEntries = imageParts.Select(x => new ImageEntry
             {
-                Url = mStorageProvider.GetPublicUrl(x.FolderPath + "/" + x.FileName),
+                Url = _storageProvider.GetPublicUrl(x.FolderPath + "/" + x.FileName),
                 Title = x.Title,
                 Caption = x.AlternateText
             });

@@ -11,10 +11,10 @@ namespace IDeliverable.Seo.Services
     {
         public SitemapProviderBase(ISitemapEntryHandler sitemapEntryHandlers)
         {
-            mSitemapEntryHandlers = sitemapEntryHandlers;
+            _sitemapEntryHandlers = sitemapEntryHandlers;
         }
 
-        private readonly ISitemapEntryHandler mSitemapEntryHandlers;
+        private readonly ISitemapEntryHandler _sitemapEntryHandlers;
         public abstract string Name { get; }
         public abstract LocalizedString DisplayName { get; }
 
@@ -30,7 +30,7 @@ namespace IDeliverable.Seo.Services
         {
             var entry = new SitemapEntry(Name, DisplayName.ToString(), url, lastModifiedUtc, changeFrequency, priority);
 
-            mSitemapEntryHandlers.EntryCreated(new SitemapEntryCreatedContext
+            _sitemapEntryHandlers.EntryCreated(new SitemapEntryCreatedContext
             {
                 Source = source,
                 Entry = entry
