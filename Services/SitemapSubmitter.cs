@@ -28,22 +28,22 @@ namespace IDeliverable.Seo.Services
                 using (var httpClient = new HttpClient())
                 {
                     var requestUrl = String.Format(searchEngineUrl, HttpUtility.UrlEncode(sitemapUrl));
-                    Logger.Information($"Submitting sitemap.xml to {requestUrl}.");
+                    Logger.Information("Submitting sitemap.xml to {0}.", requestUrl);
 
                     try
                     {
                         var response = httpClient.GetAsync(requestUrl).Result;
 
                         if (response.IsSuccessStatusCode)
-                            Logger.Information($"Successfully submitted sitemap.xml to {requestUrl}.");
+                            Logger.Information("Successfully submitted sitemap.xml to {0}.", requestUrl);
                         else
-                            Logger.Warning($"Failed to submit sitemap.xml to {requestUrl}. HTTP Status code was: {response.StatusCode}");
+                            Logger.Warning("Failed to submit sitemap.xml to {0}. HTTP Status code was: {1}", requestUrl, response.StatusCode);
 
                         result.Results.Add(new SitemapSubmissionResult(requestUrl, response.StatusCode));
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex, $"Failed to submit sitemap.xml to {requestUrl} because of an error.");
+                        Logger.Error(ex, "Failed to submit sitemap.xml to {0} because of an error.", requestUrl);
                         result.Results.Add(new SitemapSubmissionResult(requestUrl, exception: ex));
                     }
                 }

@@ -42,7 +42,7 @@ Disallow:
             var absoluteUrl = _orchardServices.WorkContext.CurrentSite.BaseUrl;
             var isSitemapEnabled = _featureManager.GetEnabledFeatures().Any(x => x.Id == "IDeliverable.Seo.Sitemap");
             var sitemapEntry = isSitemapEnabled
-                ? $"Sitemap: {_urlHelper.AbsoluteAction("Index", "Sitemap", new { Area = "IDeliverable.Seo" })}"
+                ? String.Format("Sitemap: {0}", _urlHelper.AbsoluteAction("Index", "Sitemap", new { Area = "IDeliverable.Seo" }))
                 : default(string);
 
             return String.Format(template, absoluteUrl, sitemapEntry);
